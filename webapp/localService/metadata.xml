@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Blobstorage" EntityType="CatalogService.Blobstorage"/>
+                <EntitySet Name="Request" EntityType="CatalogService.Request"/>
+                <ActionImport Name="setApproved" Action="CatalogService.setApproved"/>
+                <ActionImport Name="setRejected" Action="CatalogService.setRejected"/>
+            </EntityContainer>
+            <EntityType Name="Blobstorage">
+                <Key>
+                    <PropertyRef Name="req_uuid"/>
+                </Key>
+                <Property Name="req_uuid" Type="Edm.String" MaxLength="50" Nullable="false"/>
+                <Property Name="imagedata" Type="Edm.Binary"/>
+                <Property Name="mimetype" Type="Edm.String" MaxLength="100"/>
+            </EntityType>
+            <EntityType Name="Request">
+                <Key>
+                    <PropertyRef Name="id"/>
+                </Key>
+                <Property Name="id" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="status" Type="Edm.String" MaxLength="20" DefaultValue="New"/>
+                <Property Name="attendant" Type="Edm.String" MaxLength="50"/>
+                <Property Name="floors" Type="Collection(Edm.String)" MaxLength="20" Nullable="false"/>
+                <Property Name="reason" Type="Edm.String" MaxLength="50"/>
+                <Property Name="entryDate" Type="Edm.Date"/>
+                <Property Name="exitDate" Type="Edm.Date"/>
+                <Property Name="actualEntry" Type="Edm.DateTimeOffset"/>
+                <Property Name="actualExit" Type="Edm.DateTimeOffset"/>
+                <Property Name="name" Type="Edm.String" MaxLength="50"/>
+                <Property Name="surname" Type="Edm.String" MaxLength="50"/>
+                <Property Name="inn" Type="Edm.Int32"/>
+                <Property Name="birthDate" Type="Edm.Date"/>
+                <Property Name="gender" Type="Edm.String" MaxLength="20"/>
+                <Property Name="organization" Type="Edm.String" MaxLength="50"/>
+                <Property Name="documentNumber" Type="Edm.String" MaxLength="50"/>
+            </EntityType>
+            <Action Name="setApproved" IsBound="false">
+                <Parameter Name="id" Type="Edm.Guid"/>
+            </Action>
+            <Action Name="setRejected" IsBound="false">
+                <Parameter Name="id" Type="Edm.Guid"/>
+            </Action>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
