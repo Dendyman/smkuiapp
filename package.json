@@ -18,6 +18,8 @@
   },
   "scripts": {
     "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#app1myfioriapp-tile\"",
+    "started": "ui5 serve -o index.html --accept-remote-connections",
+    "started2": "ui5 serve -o \"test/flpSandbox.html?sap-ui-xx-viewCache=false#app1myfioriapp-tile\" --accept-remote-connections",
     "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#app1myfioriapp-tile\"",
     "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
     "deploy": "fiori verify",

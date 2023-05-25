@@ -1,0 +1,28 @@
+FROM --platform=linux/amd64 node
+
+FROM node:latest
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm config set registry https://registry.npmjs.org
+RUN npm install
+COPY . .
+#RUN npm install
+RUN npm run-script build
+WORKDIR /app/dist
+EXPOSE 8080
+EXPOSE 8081
+
+CMD ["npm","run","started"]
+
+# build environment
+FROM --platform=linux/amd64 node:current-slim as build
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+COPY . .
+RUN npm run-script build
+
+# production environment
+FROM --platform=linux/amd64 nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html

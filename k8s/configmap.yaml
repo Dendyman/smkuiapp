@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: myuiapp
+  labels:
+    app: myuiapp
+data:
+  config.json: |-
+    {
+      "API_URL": "https://afanasevdm-cfruntime-371tohiy-dev-dbapi-fiori-srv.cfapps.us10.hana.ondemand.com"
+    }
